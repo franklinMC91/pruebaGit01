@@ -21,6 +21,21 @@ public class CuentaBancaria {
             saldo -= monto;
         }
     }
+
+    //agregando metodo transferencia
+
+    public void transferir(CuentaBancaria destino, double monto) {
+        if (destino == null || destino == this) {
+            throw new IllegalArgumentException("Cuenta de destino inválida");
+        }
+
+        if (!Double.isFinite(monto) || monto <= 0 || monto > saldo) {
+            throw new IllegalArgumentException("Monto inválido o saldo insuficiente");
+        }
+
+        saldo -= monto;
+        destino.depositar(monto);
+    }
 }
 
 
