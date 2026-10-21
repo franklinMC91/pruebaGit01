@@ -24,4 +24,32 @@ public class CuentaBancariaTest {
         assertEquals(800, origen.obtenerSaldo(), 0.001);
         assertEquals(300, destino.obtenerSaldo(), 0.001);
     }
+
+    @Test
+    void cobrarComisionConSaldoSuficiente() {
+        CuentaBancaria cuenta = new CuentaBancaria(1000);
+
+        cuenta.cobrarComision(500);
+
+        assertEquals(990, cuenta.obtenerSaldo(), 0.001);
+    }
+
+    @Test
+    void cobrarComisionConSaldoInsuficiente() {
+        CuentaBancaria cuenta = new CuentaBancaria(5);
+
+        cuenta.cobrarComision(500);
+
+        assertEquals(5, cuenta.obtenerSaldo(), 0.001);
+    }
+
+    @Test
+    void cobrarComisionMontoNegativo() {
+        CuentaBancaria cuenta = new CuentaBancaria(1000);
+
+        cuenta.cobrarComision(-100);
+
+        assertEquals(1000, cuenta.obtenerSaldo(), 0.001);
+    }
+
 }

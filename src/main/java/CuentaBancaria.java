@@ -2,6 +2,9 @@ public class CuentaBancaria {
 
     private double saldo;
 
+    // NUEVO 1: Tasa de comisión del 2 %
+    private static final double TASA_COMISION = 0.02;
+
     public CuentaBancaria(double saldoInicial) {
         this.saldo = saldoInicial;
     }
@@ -35,6 +38,14 @@ public class CuentaBancaria {
 
         saldo -= monto;
         destino.depositar(monto);
+    }
+    // NUEVO 2: Método de cobro de comisión
+    public void cobrarComision(double montoOperacion) {
+        double comision = montoOperacion * TASA_COMISION;
+
+        if (montoOperacion > 0 && comision <= saldo) {
+            saldo -= comision;
+        }
     }
 }
 
